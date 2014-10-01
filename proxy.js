@@ -51,6 +51,8 @@ exports.init = function(workers, first_port, proxy_port, session_hash, no_socket
 		});
 	}
 
+	debug_log("main proxy listen on port: " + proxy_port);
+	
 	server.listen(proxy_port);
 }
 

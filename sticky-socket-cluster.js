@@ -43,6 +43,7 @@ module.exports = function pool(options, callback)
 	options.proxy_port = options.proxy_port || process.env.PROXY_PORT || 5000;
 	options.session_hash = options.session_hash || session_hash_ip;
 	options.no_sockets = options.no_sockets || false;
+	options.start_timeout = options.start_timeout || 3000;
 	
 	if (cluster.isMaster) {
 		
@@ -68,7 +69,10 @@ module.exports = function pool(options, callback)
 		
 		debug_log('init proxy...');
 		
-		require('./proxy').init(options.workers, options.first_port, options.proxy_port, options.session_hash, options.no_sockets);
+		setTimeout(function (){
+			require('./proxy').init(options.workers, options.first_port, options.proxy_port, options.session_hash, options.no_sockets)
+		}, options.start_timeout);
+
 	} else if (cluster.isWorker) {
 		
 		process.on('message', function(msg) {
