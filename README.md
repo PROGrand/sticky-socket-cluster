@@ -7,7 +7,7 @@ Simple and customizable way to use multicore features with [socket.io](http://so
 Launches multiple worker processes through [cluster](http://nodejs.org/docs/latest/api/cluster.html), using bunch of ports.
 One worker process becomes also 'http-proxy', serving as sticky session balancer.
 
-Establishes sticky round-robin balancer for any kind of http workers. Not only, but including socket.io and express. 
+Establishes sticky round-robin balancer for any kind of http frameworks. Not only, but including socket.io and express. 
 Client will always connect to same worker process sticked with customizable hash function.
 For example, socket.io multi-stage authorization will work as expected. 
 
@@ -41,7 +41,9 @@ var options = {
 	workers: 2, // total workers (default: cpu cores count).
 	first_port: 8000, // 8000, 8001 are worker's ports (default: 8000).
 	proxy_port: 5000, // default (5000).
-	session_hash: function (req, res) { return req.connection.remoteAddress; }, // can use cookie-based session ids and etc. (default: int31 hash).
+	session_hash: function (req, res) { return req.connection.remoteAddress; },
+		// can use cookie-based session ids and etc. (default: int31 hash).
+		
 	no_sockets: false // allow socket.io proxy (default: false).
 };
 
@@ -57,7 +59,7 @@ function start(port) {
 	io.on('connection', function(socket)
 	{
 		console.log("socket.io connection handler...");
-		...
+		//...
 	});
 
 	server.listen(port, function() {
