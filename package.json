@@ -1,0 +1,36 @@
+{
+  "name": "sticky-socket-cluster",
+  "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PROGrand/sticky-socket-cluster"
+  },
+  "description": "Sticky session balancer based on a `cluster` and `http-proxy` module with express and socket.io support.",
+  "author": {
+    "name": "Vladimir Koltunov",
+    "email": "progrand@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "progrand",
+      "email": "progrand@gmail.com"
+    }
+  ],
+  "main": "sticky-socket-cluster.js",
+  "dependencies": {
+    "http-proxy" : "*",
+	"debug" : "*"
+  },
+  "keywords": [
+	"express",
+	"socket.io",
+	"cluster",
+	"http-proxy"
+	],
+  "devDependencies": {
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "MIT"
+}
