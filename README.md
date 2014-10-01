@@ -35,7 +35,8 @@ function start(port) {
 ## Customized Usage
 
 ```javascript
-require('sticky-socket-cluster/replace-console')(); // prefixes console output with worker ids.
+require('sticky-socket-cluster/replace-console')();
+	// prefixes console output with worker ids.
 
 var options = {
 	workers: 2, // total workers (default: cpu cores count).
