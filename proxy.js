@@ -37,6 +37,18 @@ exports.init = function(workers, first_port, proxy_port, session_hash, no_socket
 				port : first_port + n
 			}
 		});
+
+		proxies[n].on('error', function(error, req, res) {
+
+			var json;
+			debug_log('proxy error: ' + error);
+			if (!res.headersSent) {
+				res.writeHead(500, {'content-type': 'application/json'});
+			}
+
+			json = { error: 'proxy_error', reason: error.message };
+			res.end(JSON.stringify(json))
+		});
 	}
 
 	var server = http.createServer(function(req, res) {
