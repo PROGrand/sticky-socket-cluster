@@ -34,6 +34,8 @@ function start(port) {
 
 ## Customized Usage
 
+(Complete demo in [test](test) folder)
+
 ```javascript
 require('sticky-socket-cluster/replace-console')();
 	// prefixes console output with worker ids.
