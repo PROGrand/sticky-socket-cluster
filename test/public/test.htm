@@ -3,9 +3,14 @@
 <script>
 var socket = io();
 
-socket.on('message', function(msg) {
-	alert(msg.text);
-	});
+socket.on('message', function(msg){
+	socket.emit('fromclient', {text:'stage 2'});
+});
+
+socket.on('message2', function(msg){
+	alert(msg.text); //must display 'stage 3'.
+});
+
 </script>
 </head>
 <body>
