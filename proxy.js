@@ -40,14 +40,24 @@ exports.init = function(workers, first_port, proxy_port, session_hash, no_socket
 
 		proxies[n].on('error', function(error, req, res) {
 
-			var json;
 			debug_log('proxy error: ' + error);
-			if (!res.headersSent) {
-				res.writeHead(500, {'content-type': 'application/json'});
+			if (null != res)
+			{
+				try
+				{
+					var json;
+				
+					if (!res.headersSent) {
+						res.writeHead(500, {'content-type': 'application/json'});
+					}
+			
+					json = { error: 'proxy_error', reason: error.message };
+					res.end(JSON.stringify(json))
+				}
+				catch (e)
+				{
+				}
 			}
-
-			json = { error: 'proxy_error', reason: error.message };
-			res.end(JSON.stringify(json))
 		});
 	}
 
