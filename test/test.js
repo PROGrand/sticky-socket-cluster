@@ -31,7 +31,14 @@ function start(port) {
 	io.on('connection', function(socket)
 	{
 		console.log("socket.io connection handler...");
-		io.sockets.emit('message', { text: 'ok'});
+		
+		socket.on('fromclient', function(msg)
+		{
+			console.log("message from client received: " + msg.text);
+			socket.emit('message2', { text: 'stage 3'});
+		});
+		
+		socket.emit('message', { text: 'stage 1'});
 	});
 
 	server.listen(port, function() {
