@@ -6,6 +6,7 @@
 		"socket.io" : "*",
 		"express" : "*",
 		"cookie-parser" : "*",
-		"body-parser" : "*"
+		"body-parser" : "*",
+		"sticky-socket-cluster" : "*"
 	}
 }
