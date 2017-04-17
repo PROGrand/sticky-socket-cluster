@@ -48,12 +48,10 @@ module.exports = function pool(options, callback)
 	if (cluster.isMaster) {
 		
 		debug_log('*************** MASTER: ' + require('util').inspect(options, false, null));
-		
+
 		var fork_worker = function(port)
 		{
-			var worker = cluster.fork();
-			worker.port = port;
-			worker.send({ cmd: 'start', port: worker.port });
+			var worker = cluster.fork({worker_port: port});
 		};
 
 		for (var n = 0; n < options.workers; n++) {
@@ -74,15 +72,9 @@ module.exports = function pool(options, callback)
 		}, options.start_timeout);
 
 	} else if (cluster.isWorker) {
-		
-		process.on('message', function(msg) {
-			switch(msg.cmd) {
-				case 'start':
-					debug_log('*************** WORKER PORT: ' + msg.port);
-					callback(msg.port);
-					break;
-			    }
-			});
-		
+
+		debug_log('*************** WORKER: ' + process.env.worker_port);
+
+		callback(process.env.worker_port);
 	}
 }
